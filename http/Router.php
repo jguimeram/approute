@@ -33,5 +33,15 @@ class Router
 
         $request = new Request;
         $response = new Response;
+
+        $method = $request->getMethod();
+        $path = $request->getPath();
+
+        if (isset($this->routes[$method][$path])) {
+            $handler = $this->routes[$method][$path];
+            call_user_func($handler, $request, $response);
+        } else {
+            return $response->setCode(404)->text('not found')->send();
+        }
     }
 }
