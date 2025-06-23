@@ -2,7 +2,9 @@
 
 namespace Debian\Approute\http;
 
-class Response
+use Debian\Approute\http\ResponseInterface;
+
+class Response implements ResponseInterface
 {
 
     private int $code = 200;
@@ -46,7 +48,7 @@ class Response
         return $this;
     }
 
-    public function json(string $json): self
+    public function json(array $json): self
     {
         $this->setHeader(['Content-Type' => 'application/json']);
         $this->setBody(json_encode($json));
@@ -57,7 +59,9 @@ class Response
     public function send(): void
     {
         http_response_code($this->code);
-        header('Content-Type: ' . $this->header);
+        foreach ($this->header as $key => $value) {
+            header("$key: $value");
+        }
         echo $this->content;
     }
 }

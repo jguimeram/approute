@@ -26,6 +26,20 @@ class Router
         $this->routes[$method][$post] = $handle;
     }
 
+    public function executeHandler(callable $handler, Request $request, Response $response)
+    {
+        try {
+            //code...
+            $result = call_user_func($handler, $request, $response);
+            if ($result instanceof Response) {
+                $result->send();
+            } elseif (is_string($result)) {
+                $response->text($result)->send();
+            }
+        } catch (\Throwable $th) {
+            $response->setCode(500)->text('internal server error')->send();
+        }
+    }
 
 
     public function dispatch()
@@ -39,9 +53,9 @@ class Router
 
         if (isset($this->routes[$method][$path])) {
             $handler = $this->routes[$method][$path];
-            call_user_func($handler, $request, $response);
+            $this->executeHandler($handler, $request, $response);
         } else {
-            return $response->setCode(404)->text('not found')->send();
+            $response->setCode(404)->text('not found')->send();
         }
     }
 }

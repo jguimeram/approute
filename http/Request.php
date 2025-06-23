@@ -2,7 +2,9 @@
 
 namespace Debian\Approute\http;
 
-class Request
+use  Debian\Approute\http\RequestInterface;
+
+class Request implements RequestInterface
 {
 
     private string $method;
