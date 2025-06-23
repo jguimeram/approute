@@ -1,0 +1,24 @@
+{
+    "name": "debian/approute",
+    "description": "\"Simple router in php\"",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Debian\\Approute\\": "./"
+        }
+    },
+    "scripts": {
+        "dev": "php -S localhost:8000 -t public"
+    },
+    "authors": [
+        {
+            "name": "jguimeram",
+            "email": "jguimera54@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha"
+}
