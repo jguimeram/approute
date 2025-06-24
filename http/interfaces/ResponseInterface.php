@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Debian\Approute\http;
+namespace Debian\Approute\http\interfaces;
 
 interface ResponseInterface
 {

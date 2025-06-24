@@ -2,7 +2,7 @@
 
 namespace Debian\Approute\http;
 
-use  Debian\Approute\http\RequestInterface;
+use  Debian\Approute\http\interfaces\RequestInterface;
 
 class Request implements RequestInterface
 {

@@ -29,7 +29,6 @@ class Router
     public function executeHandler(callable $handler, Request $request, Response $response)
     {
         try {
-            //code...
             $result = call_user_func($handler, $request, $response);
             if ($result instanceof Response) {
                 $result->send();

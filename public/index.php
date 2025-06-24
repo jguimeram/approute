@@ -2,6 +2,7 @@
 
 require(__DIR__ . '/../bootstrap.php');
 
+use Debian\Approute\controller\UserController;
 use Debian\Approute\http\Router;
 use Debian\Approute\http\Request;
 use Debian\Approute\http\Response;
@@ -21,5 +22,6 @@ $router->get('/text', function (Request $request, Response $response) {
     return "Hello, text";
 });
 
+$router->get('/user', [UserController::class, 'index']);
 
 $router->dispatch();

@@ -2,7 +2,7 @@
 
 namespace Debian\Approute\http;
 
-use Debian\Approute\http\ResponseInterface;
+use Debian\Approute\http\interfaces\ResponseInterface;
 
 class Response implements ResponseInterface
 {
