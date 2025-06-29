@@ -12,9 +12,5 @@ class UserController
         debug($request);
     }
 
-    public static function user(Request $request, Response $response)
-    {
-
-        debug($request);
-    }
+    public static function user(Request $request, Response $response) {}
 }
