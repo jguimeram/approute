@@ -34,6 +34,12 @@ class Router
                 $result->send();
             } elseif (is_string($result)) {
                 $response->text($result)->send();
+            } else if (is_array($result)) {
+                $response->json($result)->send();
+            } else if ($result === null) {
+                $response->setCode(204)->send(); // No Content
+            } else {
+                throw new \Exception('Invalid response type');
             }
         } catch (\Throwable $th) {
             $response->setCode(500)->text('internal server error')->send();
