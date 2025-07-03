@@ -14,13 +14,15 @@ interface ResponseInterface
     public function setHeader(array $header): self;
 
 
-    public function text(string $text): self;
+    /*  public function text(string $text): self;
 
 
     public function html(string $html): self;
 
 
-    public function json(array $json): self;
+    public function json(array $json): self; */
+
+    public function content(mixed $args): self;
 
 
 
