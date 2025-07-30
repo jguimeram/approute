@@ -10,4 +10,8 @@ interface RequestInterface
     public function getPath(): string;
 
     public function getPost(string $key): array|null;
+
+      public function setParams(array $params);
+
+    public function getParams(): array;
 }

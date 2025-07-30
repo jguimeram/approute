@@ -10,6 +10,7 @@ class Request implements RequestInterface
     private string $method;
     private string $path;
     private array $post;
+    private array $params;
 
     public function __construct()
     {
@@ -32,5 +33,13 @@ class Request implements RequestInterface
     {
         if ($key === null) return $this->post;
         return $this->post[$key] ?? null;
+    }
+
+    public function setParams(array $params){
+        $this->params = $params;
+    }
+
+    public function getParams(): array{
+        return $this->params;
     }
 }

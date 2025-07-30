@@ -2,10 +2,10 @@
 
 require(__DIR__ . '/../bootstrap.php');
 
-use Debian\Approute\controller\UserController;
 use Debian\Approute\http\Router;
-use Debian\Approute\http\Request;
 use Debian\Approute\http\Response;
+use Debian\Approute\http\Request;
+use Debian\Approute\controller\UserController;
 
 
 $router = new Router;
@@ -24,8 +24,8 @@ $router->get('/text', function (Request $request, Response $response) {
 
 $router->get('/user', [UserController::class, 'index']);
 
-$router->get('/user/{id}', function(Request $request, Response $response) {
-    return "id";
+$router->get('/user/{id}', function (Request $request, Response $response) {
+    $request->getParams();
 });
 
 $router->dispatch();
