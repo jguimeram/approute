@@ -61,16 +61,13 @@ class Router
             if (preg_match($pattern, $path, $matches)) {
                 $params = [];
                 foreach ($matches as $key => $value) {
-
                     if (!is_int($key)) {
                         $params[$key] = $value;
                     }
                 }
-
                 //set the parameters of the url (id)
                 $request->setParams($params);
                 $this->executeHandler($callback, $request, $response);
-
                 return;
             }
         }

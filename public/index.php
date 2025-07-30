@@ -22,10 +22,11 @@ $router->get('/text', function (Request $request, Response $response) {
     return "Hello, text";
 });
 
-$router->get('/user', [UserController::class, 'index']);
+$router->get('/users', [UserController::class, 'index']);
 
-$router->get('/user/{id}', function (Request $request, Response $response) {
-    $request->getParams();
+$router->get('/users/{id}', function (Request $request, Response $response) {
+    $data = $request->getParams();
+    print_r($data);
 });
 
 $router->dispatch();
