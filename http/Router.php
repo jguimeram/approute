@@ -56,6 +56,20 @@ class Router
         $method = $request->getMethod();
         $path = $request->getPath();
 
+        foreach($this->routes[$method] ?? [] as $route => $callback){
+            $pattern = '#^' . preg_replace('{(\w+)}', '(?P<$1>[^/]+)', $route) . '$#';
+            if (preg_match($pattern, $route, $matches)){
+                $params = [];
+                foreach($matches as $key => $value){
+                    if(!is_int($key)){
+                        $params[$key] = $value;
+                    }
+                }
+                print_r($params);    
+
+            }
+        }
+
         if (isset($this->routes[$method][$path])) {
             $handler = $this->routes[$method][$path];
             $this->executeHandler($handler, $request, $response);

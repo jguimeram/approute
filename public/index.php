@@ -24,4 +24,8 @@ $router->get('/text', function (Request $request, Response $response) {
 
 $router->get('/user', [UserController::class, 'index']);
 
+$router->get('/user/{id}', function(Request $request, Response $response) {
+    return "id";
+});
+
 $router->dispatch();
