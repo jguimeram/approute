@@ -58,26 +58,19 @@ class Router
 
         foreach ($this->routes[$method] ?? [] as $route => $callback) {
             $pattern = '#^' . preg_replace('{(\w+)}', '(?P<$1>[^/]+)', $route) . '$#';
-            if (preg_match($pattern, $route, $matches)) {
+            if (preg_match($pattern, $path, $matches)) {
                 $params = [];
                 foreach ($matches as $key => $value) {
+
                     if (!is_int($key)) {
                         $params[$key] = $value;
                     }
                 }
-                $request->setParams($params);
-                print_r($callback);
-              
-                /* the point is getting the handler in some way and execute the callback */
-            
 
-                /* 
-                if (isset($this->routes[$method][$path])) {
-                    $handler = $this->routes[$method][$path];
-                    $this->executeHandler($handler, $request, $response);
-                } else {
-                    $response->setCode(404)->text('not found')->send();
-                } */
+                //set the parameters of the url (id)
+                $request->setParams($params);
+                $this->executeHandler($callback, $request, $response);
+
                 return;
             }
         }
