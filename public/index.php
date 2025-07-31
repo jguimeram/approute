@@ -23,7 +23,7 @@ $router->get('/users', function (Request $request, Response $response) {
 });
 
 $router->get('/users/{id}', function (Request $request, Response $response) {
-    return $request->getParams()["id"];
+    //return $request->getParams()["id"];
 });
 
 $router->get('/about', function (Request $request, Response $response) {
