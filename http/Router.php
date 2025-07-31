@@ -10,20 +10,20 @@ class Router
 {
     private array $routes = [];
 
-    public function get(string $post, callable $handle)
+    public function get(string $path, callable $handle)
     {
-        $this->setRoutes('GET', $post, $handle);
+        $this->setRoutes('GET', $path, $handle);
     }
 
-    public function post(string $post, callable $handle)
+    public function post(string $path, callable $handle)
     {
-        $this->setRoutes('POST', $post, $handle);
+        $this->setRoutes('POST', $path, $handle);
     }
 
 
-    private function setRoutes(string $method, string $post, callable $handle)
+    private function setRoutes(string $method, string $path, callable $handle)
     {
-        $this->routes[$method][$post] = $handle;
+        $this->routes[$method][$path] = $handle;
     }
 
     public function executeHandler(callable $handler, Request $request, Response $response)
@@ -69,12 +69,11 @@ class Router
                 }
                 //set the parameters of the url (id)
                 $request->setParams($params);
-
+                debug($callback);
                 $this->executeHandler($callback, $request, $response);
-                return $response;
+                return; 
             }
         }
         $response->setCode(404)->setBody('Not Found')->send();
-        return $response;
     }
 }
