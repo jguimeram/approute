@@ -30,6 +30,7 @@ class Router
     {
         try {
             $result = call_user_func($handler, $request, $response);
+
             if ($result instanceof Response) {
                 $result->send();
             } elseif (is_string($result)) {
