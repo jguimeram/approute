@@ -42,7 +42,6 @@ class Router
                 throw new \Exception('Invalid response type');
             }
         } catch (\Throwable $th) {
-            echo $th->getMessage();
             $response->setCode(500)->text('internal server error')->send();
         }
     }
@@ -62,7 +61,6 @@ class Router
             $pattern = '#^' . preg_replace('/\{(\w+)\}/', '(?P<$1>[^/]+)', $route) . '$#';
 
             if (preg_match($pattern, $path, $matches)) {
-                echo "entra preg_match" . "\n";
                 $params = [];
                 foreach ($matches as $key => $value) {
                     if (!is_int($key)) {
