@@ -56,6 +56,7 @@ class Router
 
         $method = $request->getMethod();
         $path = $request->getPath();
+        debug($request);
 
 
         foreach ($this->routes[$method] ?? [] as $route => $callback) {
@@ -70,7 +71,7 @@ class Router
                 }
                 //set the parameters of the url (id)
                 $request->setParams($params);
-                debug($route);
+                debug($request);
 
                 $this->executeHandler($callback, $request, $response);
             }

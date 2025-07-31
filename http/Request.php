@@ -15,7 +15,8 @@ class Request implements RequestInterface
     public function __construct()
     {
         $this->method = $_SERVER['REQUEST_METHOD'];
-        $this->path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $this->path = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+        echo $this->path;
         $this->post = $_POST ?? [];
     }
 
