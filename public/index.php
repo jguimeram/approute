@@ -14,19 +14,22 @@ $router->get('/', function (Request $request, Response $response) {
     return $response->text('hello, world');
 });
 
-$router->get('/about', function (Request $request, Response $response) {
-    return $response->json(["name" => "Cristina", "status" => "MILF"]);
-});
-
 $router->get('/text', function (Request $request, Response $response) {
     return "Hello, text";
 });
 
-$router->get('/users', [UserController::class, 'index']);
+$router->get('/users', function (Request $request, Response $response) {
+    return "Hello, users";
+});
 
 $router->get('/users/{id}', function (Request $request, Response $response) {
     $data = $request->getParams();
-    print_r($data);
+    debug($data);
 });
+
+$router->get('/about', function (Request $request, Response $response) {
+    return $response->json(["name" => "John", "status" => "Smith"]);
+});
+
 
 $router->dispatch();

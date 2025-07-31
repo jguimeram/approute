@@ -9,7 +9,7 @@ class UserController
 {
     public static function index(Request $request, Response $response)
     {
-        return $response->text('hello world')->send();
+        return ["user" => "name", "status" => "ok"];
     }
 
     public static function user(Request $request, Response $response) {}

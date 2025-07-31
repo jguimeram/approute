@@ -8,7 +8,7 @@ class Response implements ResponseInterface
 {
 
     private int $code = 200;
-    private string $content;
+    private string $content = "";
     private array $header = [];
 
     public function setCode(int $num): self

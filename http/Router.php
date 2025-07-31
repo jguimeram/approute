@@ -42,6 +42,7 @@ class Router
                 throw new \Exception('Invalid response type');
             }
         } catch (\Throwable $th) {
+            echo $th->getMessage();
             $response->setCode(500)->text('internal server error')->send();
         }
     }
@@ -56,8 +57,10 @@ class Router
         $method = $request->getMethod();
         $path = $request->getPath();
 
+
         foreach ($this->routes[$method] ?? [] as $route => $callback) {
-            $pattern = '#^' . preg_replace('{(\w+)}', '(?P<$1>[^/]+)', $route) . '$#';
+            $pattern = '#^' . preg_replace('/\{(\w+)\}/', '(?P<$1>[^/]+)', $route) . '$#';
+
             if (preg_match($pattern, $path, $matches)) {
                 $params = [];
                 foreach ($matches as $key => $value) {
@@ -67,8 +70,9 @@ class Router
                 }
                 //set the parameters of the url (id)
                 $request->setParams($params);
+                debug($route);
+
                 $this->executeHandler($callback, $request, $response);
-                return;
             }
         }
     }
