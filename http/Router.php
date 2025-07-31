@@ -56,13 +56,13 @@ class Router
 
         $method = $request->getMethod();
         $path = $request->getPath();
-        debug($request);
 
 
         foreach ($this->routes[$method] ?? [] as $route => $callback) {
             $pattern = '#^' . preg_replace('/\{(\w+)\}/', '(?P<$1>[^/]+)', $route) . '$#';
 
             if (preg_match($pattern, $path, $matches)) {
+                echo "entra preg_match" . "\n";
                 $params = [];
                 foreach ($matches as $key => $value) {
                     if (!is_int($key)) {
@@ -71,10 +71,12 @@ class Router
                 }
                 //set the parameters of the url (id)
                 $request->setParams($params);
-                debug($request);
 
                 $this->executeHandler($callback, $request, $response);
+                return $response;
             }
         }
+        $response->setCode(404)->setBody('Not Found')->send();
+        return $response;
     }
 }

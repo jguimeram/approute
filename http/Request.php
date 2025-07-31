@@ -16,7 +16,6 @@ class Request implements RequestInterface
     {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->path = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
-        echo $this->path;
         $this->post = $_POST ?? [];
     }
 
@@ -36,11 +35,13 @@ class Request implements RequestInterface
         return $this->post[$key] ?? null;
     }
 
-    public function setParams(array $params){
+    public function setParams(array $params)
+    {
         $this->params = $params;
     }
 
-    public function getParams(): array{
+    public function getParams(): array
+    {
         return $this->params;
     }
 }
